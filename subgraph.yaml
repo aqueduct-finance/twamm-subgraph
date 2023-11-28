@@ -14,23 +14,32 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - PairCreated
-        - SetAuction
-        - SetAuctionSetter
-        - SetFeeTo
-        - SetFeeToSetter
+        - Pool
       abis:
         - name: Factory
           file: ./abis/Factory.json
       eventHandlers:
         - event: PairCreated(indexed address,indexed address,address,uint256)
           handler: handlePairCreated
-        - event: SetAuction(address)
-          handler: handleSetAuction
-        - event: SetAuctionSetter(address)
-          handler: handleSetAuctionSetter
-        - event: SetFeeTo(address)
-          handler: handleSetFeeTo
-        - event: SetFeeToSetter(address)
-          handler: handleSetFeeToSetter
+      file: ./src/factory.ts
+
+templates:
+  - kind: ethereum/contract
+    name: Pool
+    network: mumbai
+    source:
+      abi: Pool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Pool
+        - Sync
+      abis:
+        - name: Pool
+          file: ./abis/Pool.json
+      eventHandlers:
+        - event: Sync(uint112,uint112)
+          handler: handleSync
       file: ./src/factory.ts

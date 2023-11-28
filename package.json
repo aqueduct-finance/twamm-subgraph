@@ -1,5 +1,5 @@
 {
-  "name": "test-aqueduct-graph",
+  "name": "aqueduct-twamm-subgraph",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
